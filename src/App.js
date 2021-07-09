@@ -4,26 +4,32 @@ import PriceCard from './Components/Card';
 import NavBar from './Components/NavBar';
 import { useEffect,useState } from 'react';
 import axios from 'axios';
-
+import { Container } from '@material-ui/core';
+import Counters from './Components/Counter';
 function App() {
   const [Data, setData] = useState({
     low: 0,
     high: 0,
     last: 0,
   });
+  const [Count, setCount] = useState(0);
   const [Loading, setLoading] = useState(true);
 
   useEffect(()=>{
+    async function getDogecoinPrice() {
+      const { data } = await axios.get(
+        'https://nitinr-cors.herokuapp.com/https://api.wazirx.com/api/v2/tickers/dogeusdt'
+      );
+      setData(data.ticker);
+      setLoading(false)
+    }
+    getDogecoinPrice();
+    setInterval(() => getDogecoinPrice(), 10000);
+
     setInterval(()=>{
-      axios.get("https://nitinr-cors.herokuapp.com/https://api.wazirx.com/api/v2/tickers/dogeusdt").then((res)=>{
-        setData(res.data.ticker)
-        setLoading(false)
-      })
-      .catch((err)=>{
-        setLoading(false)
-      })
+      setCount(Count+1)
     },1000)
-  },[Data])
+  })
   return Loading?<p>Loading...</p>:(
     <div >
       <NavBar/>
@@ -35,6 +41,10 @@ function App() {
           <PriceCard type="current" price={Data.last}/>
         </div>
       </header>
+
+      <Container>
+        
+      </Container>
     </div>
   );
 }

@@ -34,10 +34,10 @@ export default function NavBar() {
             {/* <MenuIcon /> */}
           </IconButton>
           <Typography variant="h6" className={classes.title} style={styles.font}>
-            News
+            DogeFreeFire
           </Typography>
-          <Button color="inherit" style={styles.font}>Login</Button>
-          <Button color="inherit" style={styles.font}>Login</Button>
+          <Button color="inherit" style={styles.font}>Home</Button>
+          <Button color="inherit" style={styles.font}>Contact</Button>
           <Button color="inherit" style={styles.font}>Login</Button>
         </Toolbar>
       </AppBar>
